@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "product"
+    "displayName": "product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,63 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "maxLength": 71,
+      "minLength": 3
+    },
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "T-shirt",
+        "Golves",
+        "stickers"
+      ],
+      "required": true,
+      "default": "T-shirt"
+    },
+    "size": {
+      "type": "string",
+      "maxLength": 50
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "red",
+        "blue",
+        "green",
+        "pink",
+        "black"
+      ],
+      "required": true
+    },
+    "price": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "availableQty": {
+      "type": "integer",
+      "default": 0,
+      "required": true
     }
   }
 }
