@@ -15,7 +15,7 @@ const Product = (props) => {
           <div className="flex flex-wrap -m-4">
             {props.products.data.map((item) => {
               return (
-                <div className="xl:w-1/4 md:w-1/2 p-4">
+                <div key={item.attributes.slug} className="xl:w-1/4 md:w-1/2 p-4">
                   <div className="bg-gray-100 p-6 rounded-lg">
                     <img className="h-40 rounded w-full object-cover object-center mb-6" src={item.attributes.image.data && item.attributes.image.data.attributes.name} alt="content" />
                     <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">{item.attributes.category}</h3>
@@ -25,7 +25,7 @@ const Product = (props) => {
                     <div>{item.attributes.color}</div>
                     <p className="leading-relaxed text-base">{item.attributes.description}</p>
                     <Link href={`/product/${item.attributes.slug}`}>
-                    <button class="text-white bg-indigo-500 border-0 py-2 my-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm">Buy Now</button>
+                    <button className="text-white bg-indigo-500 border-0 py-2 my-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-sm">Buy Now</button>
                     </Link>
                   </div>
                 </div>
@@ -41,8 +41,6 @@ const Product = (props) => {
 export async function getServerSideProps(context) {
   let a = await fetch("http://localhost:1337/api/products?populate=*")
   let products = await a.json();
-  console.log(products)
-
   return {
     props: { products: products }, // will be passed to the page component as props
   }
