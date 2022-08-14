@@ -7,7 +7,7 @@ const Slug = ({product, addToCart}) => {
         <div><section className="text-gray-600 body-font overflow-hidden">
             <div className="container px-5 py-24 mx-auto">
                 <div className="lg:w-4/5 mx-auto flex flex-wrap">
-                    <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400" />
+                    <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.attributes.image.data && product.attributes.image.data.attributes.name}/>
                     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                         <h2 className="text-sm title-font text-gray-500 tracking-widest">Myshop</h2>
                         <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.attributes.title}</h1>
@@ -94,7 +94,7 @@ const Slug = ({product, addToCart}) => {
 
 export async function getServerSideProps(context) {
     let header = {Authorization: "Bearer 4a8f0e262556180a5b111999f1ae823c2742de16d092ef63cc2fadba1a0ccf5c0b83d10f448623a62546f69f1b0bf0ef7616253585804e99a9140b7923892b1ad30b61418eda710e201a8685f8ec191c359b238a744d1a3b7731594791a0c9a85b9d0d1e12a6c7546c1964ebe869d8d76c2e25af06633a92e94d408f4f0d14f1"}
-    let a = await fetch("http://localhost:1337/api/products?filters[slug]=" + context.query.slug, {headers: header})
+    let a = await fetch("http://localhost:1337/api/products?filters[slug]=" + context.query.slug + "&populate=*", {headers: header})
     let product = await a.json();  
     return {
       props: { product: product.data[0] }, // will be passed to the page component as props
